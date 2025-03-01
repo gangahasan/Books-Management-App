@@ -1,15 +1,18 @@
 
 import axios from "axios";
-export const FETCH_BOOKS = "FETCH_BOOKS";
-export const UPADTE_BOOK_STATE = "UPADTE_BOOK_STATE";
+export const FETCH_BOOKS_REQUEST = "FETCH_BOOKS_REQUEST";
+export const FETCH_BOOKS_SUCCESS = "FETCH_BOOKS_SUCCESS";
 
-export const fetchBooks=()=>async(dispatch)=>{
+export const FETCH_BOOKS_FAILURE = "FETCH_BOOKS_FAILURE";
+export const UPADTE_BOOK_STATUS = "UPADTE_BOOK_STARUS";
+
+export const fetchBooks=()=> async(dispatch)=> {
     try {
-        const response= await axios.get('https://module4-main-evaluation-default-rtdb.firebaseio.com/books.json');
-
-        console.log(response.data,"response");
-        dispatch({type: FETCH_BOOKS, payload: response.data});
+        dispatch({ type: FETCH_BOOKS_REQUEST });
+            const response = await axios.get("https://module4-main-evaluation-default-rtdb.firebaseio.com/books.json");
+        console.log(response,"response");
+        dispatch({ type: FETCH_BOOKS_REQUEST, payload: response.data });
     } catch (error) {
-        console.error(error);
+        dispatch({ type: FETCH_BOOKS_FAILURE, payload: error.message });
     }
 }
