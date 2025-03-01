@@ -11,7 +11,8 @@ export const fetchBooks=()=> async(dispatch)=> {
         dispatch({ type: FETCH_BOOKS_REQUEST });
             const response = await axios.get("https://module4-main-evaluation-default-rtdb.firebaseio.com/books.json");
         console.log(response,"response");
-        dispatch({ type: FETCH_BOOKS_REQUEST, payload: response.data });
+        const books = Object.entries(response.data).map(([id,bookdata])=>({id: bookdata}))
+        dispatch({ type: FETCH_BOOKS_REQUEST, payload: books });
     } catch (error) {
         dispatch({ type: FETCH_BOOKS_FAILURE, payload: error.message });
     }
