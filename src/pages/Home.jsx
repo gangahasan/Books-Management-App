@@ -7,7 +7,7 @@ const Home = () => {
     console.log(books.length);
 
     const dispatch = useDispatch();
-    
+
     useEffect(()=>{
         dispatch(fetchBooks)
     },[dispatch])
@@ -18,8 +18,9 @@ const Home = () => {
         {books.length >0 &&
             books.map(book => (
                 <div key={book.id}>
-                    <h2>{book.title}</h2>
+                    <h2>{book.coverImage}</h2>
                     <p>{book.author}</p>
+                    <p>{book.title}</p>
                 </div>
             ))
         }
